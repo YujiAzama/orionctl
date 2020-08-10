@@ -1,0 +1,16 @@
+---
+description: A subscription to get info about Room1
+subject:
+  entities:
+  - id: Room1
+    type: Room
+  condition:
+    attrs:
+    - pressure
+notification:
+  http:
+    url: http://localhost:1028/accumulate
+  attrs:
+  - temperature
+expires: '2040-01-01T14:00:00.00Z'
+throttling: 5
