@@ -14,7 +14,7 @@ This is a command line tool for calling FIWARE Orion API.
 
 An orionctl provides:
 
-- Create, Get Retrieve and Delete Orion Subscription
+- Create, Get, Retrieve and Delete Orion Subscription and Registration resources
 - Use resources defined in JSON and YAML
 
 ## Installing
