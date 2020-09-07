@@ -40,9 +40,22 @@ var getSubscriptionCmd = &cobra.Command{
 		if err != nil {
 			panic(err)
 		}
-		subscriptions, err := client.GetSubscriptions(context.Background(), fs, fsp)
-		if err != nil {
-			panic(err)
+
+		var subscriptions = []*orionclient.Subscription{}
+		if len(args) > 0 {
+			for _, id := range args {
+				subscription, err := client.GetSubscription(context.Background(), id, fs, fsp)
+				if err != nil {
+					panic(err)
+				}
+				subscriptions = append(subscriptions, subscription)
+			}
+		} else {
+			allSubscriptions, err := client.GetSubscriptions(context.Background(), fs, fsp)
+			if err != nil {
+				panic(err)
+			}
+			subscriptions = allSubscriptions
 		}
 
 		table := uitable.New()
@@ -65,9 +78,22 @@ var describeSubscriptionCmd = &cobra.Command{
 		if err != nil {
 			panic(err)
 		}
-		subscriptions, err := client.GetSubscriptions(context.Background(), fs, fsp)
-		if err != nil {
-			panic(err)
+
+		var subscriptions = []*orionclient.Subscription{}
+		if len(args) > 0 {
+			for _, id := range args {
+				subscription, err := client.GetSubscription(context.Background(), id, fs, fsp)
+				if err != nil {
+					panic(err)
+				}
+				subscriptions = append(subscriptions, subscription)
+			}
+		} else {
+			allSubscriptions, err := client.GetSubscriptions(context.Background(), fs, fsp)
+			if err != nil {
+				panic(err)
+			}
+			subscriptions = allSubscriptions
 		}
 
 		table := uitable.New()
