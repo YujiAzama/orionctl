@@ -40,10 +40,23 @@ var getRegistrationCmd = &cobra.Command{
 		if err != nil {
 			panic(err)
 		}
-		registrations, err := client.GetRegistrations(context.Background(), fs, fsp)
-		if err != nil {
-			panic(err)
-		}
+
+                var registrations = []*orionclient.Registration{}
+                if len(args) > 0 {
+                        for _, id := range args {
+                                registration, err := client.GetRegistration(context.Background(), id, fs, fsp)
+                                if err != nil {
+                                        panic(err)
+                                }
+                                registrations = append(registrations, registration)
+                        }
+                } else {
+                        allRegistrations, err := client.GetRegistrations(context.Background(), fs, fsp)
+                        if err != nil {
+                                panic(err)
+                        }
+                        registrations = allRegistrations
+                }
 
 		table := uitable.New()
 		table.MaxColWidth = 50
@@ -65,10 +78,23 @@ var describeRegistrationCmd = &cobra.Command{
 		if err != nil {
 			panic(err)
 		}
-		registrations, err := client.GetRegistrations(context.Background(), fs, fsp)
-		if err != nil {
-			panic(err)
-		}
+
+                var registrations = []*orionclient.Registration{}
+                if len(args) > 0 {
+                        for _, id := range args {
+                                registration, err := client.GetRegistration(context.Background(), id, fs, fsp)
+                                if err != nil {
+                                        panic(err)
+                                }
+                                registrations = append(registrations, registration)
+                        }
+                } else {
+                        allRegistrations, err := client.GetRegistrations(context.Background(), fs, fsp)
+                        if err != nil {
+                                panic(err)
+                        }
+                        registrations = allRegistrations
+                }
 
 		table := uitable.New()
 		table.MaxColWidth = 80
