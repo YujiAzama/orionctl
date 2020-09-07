@@ -47,9 +47,9 @@ var getSubscriptionCmd = &cobra.Command{
 
 		table := uitable.New()
 		table.MaxColWidth = 50
-		table.AddRow("ID", "Description")
+		table.AddRow("ID", "Description", "Notification URL", "LastSuccess")
 		for _, subscription := range subscriptions {
-			table.AddRow(subscription.Id, subscription.Description)
+			table.AddRow(subscription.Id, subscription.Description, subscription.Notification.HTTP.URL, subscription.Notification.LastSuccess)
 		}
 		fmt.Println(table)
 	},
@@ -91,12 +91,18 @@ var describeSubscriptionCmd = &cobra.Command{
 					table.AddRow("             ", value + ", Type: " + entity.Type)
 				}
 			}
-			for i, attr := range subscription.Subject.Condition.Attrs {
-				if i == 0 {
-					table.AddRow("    Condition:")
-					table.AddRow("        Attrs:", attr)
-				} else {
-					table.AddRow("              ", attr)
+			if len(subscription.Subject.Condition.Attrs) > 0 || subscription.Subject.Condition.Expression != nil {
+				table.AddRow("    Condition:")
+				for i, attr := range subscription.Subject.Condition.Attrs {
+					if i == 0 {
+						table.AddRow("        Attrs:", attr)
+					} else {
+						table.AddRow("              ", attr)
+					}
+				}
+				if subscription.Subject.Condition.Expression != nil {
+					table.AddRow("        Expression:")
+					table.AddRow("            Q:", subscription.Subject.Condition.Expression.Q)
 				}
 			}
 			table.AddRow("Notification:")
@@ -109,6 +115,14 @@ var describeSubscriptionCmd = &cobra.Command{
 					table.AddRow("          ", attr)
 				}
 			}
+			table.AddRow("    AttrsFormat:", subscription.Notification.AttrsFormat)
+			table.AddRow("    LastFailure:", subscription.Notification.LastFailure)
+			table.AddRow("    LastFailureReason:", subscription.Notification.LastFailureReason)
+			table.AddRow("    LastNotification:", subscription.Notification.LastNotification)
+			table.AddRow("    LastSuccess:", subscription.Notification.LastSuccess)
+			table.AddRow("    LastSuccessCode:", subscription.Notification.LastSuccessCode)
+			table.AddRow("    OnlyChangedAttrs:", subscription.Notification.OnlyChangedAttrs)
+			table.AddRow("    TimesSent:", subscription.Notification.TimesSent)
 			table.AddRow("Expires:", subscription.Expires)
 			table.AddRow("Throttling:", subscription.Throttling)
 			table.AddRow("")
