@@ -31,9 +31,10 @@ var registrationFile string
 var registration orionclient.Registration
 
 var getRegistrationCmd = &cobra.Command{
-	Use:   "registration",
-	Short: "get registration",
-	Long:  "get registration",
+	Use:   "registrations",
+	Aliases: []string{"registration", "regist"},
+	Short: "Get registration. Aliases: [\"registration\", \"regist\"]",
+	Long:  "Get registration",
 	Run: func(cmd *cobra.Command, args []string) {
 		oc := orionclient.ClientConfig{Host: config.Host, Port: config.Port, TLS: config.TLS, Token: config.Token}
 		client, err := orionclient.NewClient(oc)
@@ -69,9 +70,10 @@ var getRegistrationCmd = &cobra.Command{
 }
 
 var describeRegistrationCmd = &cobra.Command{
-	Use:   "registration",
-	Short: "describe registration",
-	Long:  "describe registration",
+	Use:   "registrations",
+	Aliases: []string{"registration", "regist"},
+	Short: "Describe registration. Aliases: [\"registration\", \"regist\"]",
+	Long:  "Describe registration",
 	Run: func(cmd *cobra.Command, args []string) {
 		oc := orionclient.ClientConfig{Host: config.Host, Port: config.Port, TLS: config.TLS, Token: config.Token}
 		client, err := orionclient.NewClient(oc)
@@ -136,9 +138,10 @@ var describeRegistrationCmd = &cobra.Command{
 }
 
 var createRegistrationCmd = &cobra.Command{
-	Use:   "registration",
-	Short: "create registration",
-	Long:  "create registration resources by filename",
+	Use:   "registrations",
+	Aliases: []string{"registration", "regist"},
+	Short: "Create registration. Aliases: [\"registration\", \"regist\"]",
+	Long:  "Create registration resources by filename",
 	Run:  func(cmd *cobra.Command, args []string) {
 		viper.SetConfigName(registrationFile)
 		viper.SetConfigType("yml")
@@ -168,9 +171,10 @@ var createRegistrationCmd = &cobra.Command{
 }
 
 var deleteRegistrationCmd = &cobra.Command{
-	Use:   "registration",
-	Short: "delete registration",
-	Long:  "delete registration",
+	Use:   "registrations",
+	Aliases: []string{"registration", "regist"},
+	Short: "Delete registration. Aliases: [\"registration\", \"regist\"]",
+	Long:  "Delete registration",
 	Args:  func(cmd *cobra.Command, args []string) error {
 		if len(args) < 1 {
 			return errors.New("requires a registration ID")

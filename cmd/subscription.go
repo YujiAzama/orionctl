@@ -31,9 +31,10 @@ var subsFile string
 var subscription orionclient.Subscription
 
 var getSubscriptionCmd = &cobra.Command{
-	Use:   "subscription",
-	Short: "get subscription",
-	Long:  "get subscription",
+	Use:   "subscriptions",
+	Aliases: []string{"subscription", "subs"},
+	Short: "Get subscription. Aliases: [\"subscription\", \"subs\"]",
+	Long:  "Get subscription",
 	Run: func(cmd *cobra.Command, args []string) {
 		oc := orionclient.ClientConfig{Host: config.Host, Port: config.Port, TLS: config.TLS, Token: config.Token}
 		client, err := orionclient.NewClient(oc)
@@ -69,9 +70,10 @@ var getSubscriptionCmd = &cobra.Command{
 }
 
 var describeSubscriptionCmd = &cobra.Command{
-	Use:   "subscription",
-	Short: "describe subscription",
-	Long:  "describe subscription",
+	Use:   "subscriptions",
+	Aliases: []string{"subscription", "subs"},
+	Short: "Describe subscription. Aliases: [\"subscription\", \"subs\"]",
+	Long:  "Describe subscription",
 	Run: func(cmd *cobra.Command, args []string) {
 		oc := orionclient.ClientConfig{Host: config.Host, Port: config.Port, TLS: config.TLS, Token: config.Token}
 		client, err := orionclient.NewClient(oc)
@@ -158,9 +160,10 @@ var describeSubscriptionCmd = &cobra.Command{
 }
 
 var createSubscriptionCmd = &cobra.Command{
-	Use:   "subscription",
-	Short: "create subscription",
-	Long:  "create subscription resources by filename",
+	Use:   "subscriptions",
+	Aliases: []string{"subscription", "subs"},
+	Short: "Create subscription. Aliases: [\"subscription\", \"subs\"]",
+	Long:  "Create subscription resources by filename",
 	Run:  func(cmd *cobra.Command, args []string) {
 		viper.SetConfigName(subsFile)
 		viper.SetConfigType("yml")
@@ -190,9 +193,10 @@ var createSubscriptionCmd = &cobra.Command{
 }
 
 var deleteSubscriptionCmd = &cobra.Command{
-	Use:   "subscription",
-	Short: "delete subscription",
-	Long:  "delete subscription",
+	Use:   "subscriptions",
+	Aliases: []string{"subscription", "subs"},
+	Short: "Delete subscription. Aliases: [\"subscription\", \"subs\"]",
+	Long:  "Delete subscription",
 	Args:  func(cmd *cobra.Command, args []string) error {
 		if len(args) < 1 {
 			return errors.New("requires a subscription ID")
